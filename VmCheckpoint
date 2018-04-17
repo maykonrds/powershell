@@ -1,0 +1,21 @@
+<#PSScriptInfo
+
+.VERSION 1.0
+
+.AUTHOR Maykon Rodrigues dos Santos
+
+.DATA Abril 2018
+
+#>
+
+<#
+    .SYNOPSIS
+    Take and Delete VMCheckpoint
+
+    .DESCRIPTION
+    Take VMCheckpoint
+      
+    .EXAMPLE
+     .\VMCheckpoint 
+     
+#>
