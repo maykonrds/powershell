@@ -33,8 +33,6 @@ $Folder = $Destination+$PortString+"_"+$Project
 $ServiceName = "$PortString"+"_"+"$Project"
 Write-host $Folder
 
-$ServiceName | GM
-
 function CreateDirCopy {
 
 Write-Host "Creating a directory..."
