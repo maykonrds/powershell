@@ -30,14 +30,11 @@ Param(
 if(-not($Source)) { Throw "You must supply a value for -Source" }
 if(-not($Destination)) { Throw "You must supply a value for -Destination" }
 
-
 function GetVM
 {
 
 # Get All VMs and stores value in $Vms variable
-
 $Vms= get-vm -ComputerName $Source | Select-Object Name,Path,State,Computername
-
    
     $Vms | OGV -title "Move VMs" -PassThru | % {
     $VmLoop= $_.name
@@ -61,11 +58,10 @@ $Vms= get-vm -ComputerName $Source | Select-Object Name,Path,State,Computername
         $Count = [int]$Aux
         # Count 1            
 
-
         if ( $Count -eq 1) {
         $Disk | % {
         $DiskA1 = $_
-        
+       
         } 
          Write-Host "Moving Virtual Machine"        
          
@@ -154,7 +150,6 @@ $Vms= get-vm -ComputerName $Source | Select-Object Name,Path,State,Computername
             }  #End IF                   
                       
         } # End $Vms | OGV    
-
 
 } # End Function
 
