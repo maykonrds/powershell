@@ -82,6 +82,7 @@ $SolrCMD="$Folder\bin\solr.cmd"
 & $Nssm set $ServiceName Start SERVICE_AUTO_START
 & $Nssm set $ServiceName Description "Solr 6.6.2 ($Project)"
 & $Nssm set $ServiceName AppDirectory "$Folder\bin"
+& $Nssm set $ServiceName DisplayName "Solr 6.6.2 ($Project)"
 
 Write-Host "Starting the Service..."
 Get-Service $ServiceName | Start-Service
