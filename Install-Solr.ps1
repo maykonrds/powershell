@@ -46,7 +46,7 @@ function CreateJavaCert {
 
 cd "$Folder\server\etc\"
 Write-Host "creating the certificate...."
-& $Java -genkeypair -alias "$Project-solrssl" -keyalg RSA -keysize 2048 -keypass MyPassword -storepass MyPassword -validity 9999 -keystore $Project-solrssl.keystore.jks -ext SAN=DNS:$Project-solr.linear.local -dname "CN=$Project, OU=DevOps, O=Valtech, L=Ottawa, ST=Ontario, C=CA"
+& $Java -genkeypair -alias "$Project-solrssl" -keyalg RSA -keysize 2048 -keypass MyPassword -storepass MyPassword -validity 9999 -keystore $Project-solrssl.keystore.jks -ext SAN=DNS:$Project-solr.linear.local -dname "CN=$Project, OU=DevOps, O=C=CA"
 & $Java -importkeystore -srckeystore $Project-solrssl.keystore.jks -destkeystore $Project-solrssl.keystore.p12 -srcstoretype jks -deststoretype pkcs12 -keystore "$Project.p12" -deststorepass MyPassword -srcstorepass MyPassword
 }
 
@@ -58,7 +58,7 @@ Add-Content solr.in.cmd "set SOLR_SSL_KEY_STORE=etc/$Project-solrssl.keystore.jk
 Add-Content solr.in.cmd "set SOLR_SSL_KEY_STORE=etc/$Project-solrssl.keystore.jks"
 Add-Content solr.in.cmd "set SOLR_SSL_KEY_STORE_PASSWORD=MyPassword"
 Add-Content solr.in.cmd "set SOLR_SSL_TRUST_STORE=etc/$Project-solrssl.keystore.jks"
-Add-Content solr.in.cmd "set SOLR_SSL_TRUST_STORE_PASSWORD=Mypassword"
+Add-Content solr.in.cmd "set SOLR_SSL_TRUST_STORE_PASSWORD=MyPassword"
 Add-Content solr.in.cmd "set SOLR_SSL_NEED_CLIENT_AUTH=false"
 Add-Content solr.in.cmd "set SOLR_SSL_WANT_CLIENT_AUTH=false"
 }
