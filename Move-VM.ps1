@@ -1,7 +1,7 @@
 <#PSScriptInfo
 .VERSION 1.1
 
-.AUTHOR Maykon Rodrigues dos Santos
+.AUTHOR Maykon Rodrigues dos Santos.
 
 .DATA February 2018
 
