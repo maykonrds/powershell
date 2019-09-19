@@ -1,11 +1,10 @@
-﻿#
+#
 # Shutdown VMs and change Azure SQL Database Tier.
 #
 Connect-AzAccount
 
-Function Get-VmStatus{
+
 $VMStatus=Get-AzVm | Get-AzVm -Status | select ResourceGroupName, Name, @{n="Status"; e={$_.Statuses[1].DisplayStatus}}
-}
 
 Function Stop-Vm{
 
@@ -42,6 +41,6 @@ $SQLServer=Get-AzResourceGroup | Get-AzSqlServer | Select-Object servername,Reso
 
 }
 
-Get-VmStatus
+
 Stop-Vm
 SQL-Tier
