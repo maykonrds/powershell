@@ -3,7 +3,6 @@
 #
 Connect-AzAccount
 
-
 $VMStatus=Get-AzVm | Get-AzVm -Status | select ResourceGroupName, Name, @{n="Status"; e={$_.Statuses[1].DisplayStatus}}
 
 Function Stop-Vm{
@@ -29,7 +28,6 @@ Foreach($Status in $VMStatus){
     } # End catch
 } # End Function
 
-
 Function SQL-Tier{
 
 $SQLServer=Get-AzResourceGroup | Get-AzSqlServer | Select-Object servername,ResourceGroupName
@@ -40,7 +38,5 @@ $SQLServer=Get-AzResourceGroup | Get-AzSqlServer | Select-Object servername,Reso
     }
 
 }
-
-
 Stop-Vm
 SQL-Tier
