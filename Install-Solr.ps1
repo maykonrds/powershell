@@ -66,7 +66,7 @@ Add-Content solr.in.cmd "set SOLR_SSL_WANT_CLIENT_AUTH=false"
 function ImportCertWindows {
 
 cd "$Folder\server\etc\"
-Write-Host "Import the Certificate the certificate...."
+Write-Host "Import the Certificate..."
 $Password="MyPassword"
 $SecurePassword = ConvertTo-SecureString –String $Password -AsPlainText -Force
 Import-PfxCertificate -FilePath "$Project.p12" -CertStoreLocation cert:\LocalMachine\AuthRoot -Password $SecurePassword
