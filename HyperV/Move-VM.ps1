@@ -20,7 +20,7 @@
      .\Move-Vm -Source MYServerSour -Destination MYServerDest
 #>
 
-# Your server here
+# Your server here.
 Param(
     [Parameter(Mandatory=$true)]
     [string]$Source,
