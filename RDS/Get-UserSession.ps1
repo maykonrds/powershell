@@ -25,7 +25,7 @@ Param(
     [Parameter(
         Position = 0,
         ValueFromPipeline = $True)]
-    [string[]]$computername="RDS-SRV01",
+    [string[]]$computername = "RDS-SRV01",
     [string[]]$username,
     [string]$disconnectUser,
     [string]$disconnectAllUser,
@@ -167,7 +167,7 @@ ForEach ($computer in $computername) {
                 }                             
                
                 #Output the result
-                 $temp                                        
+                $temp                                        
                 # User logoff based on the name, you can have more than one username as a parameter
                 foreach ($usernameItem in $username) {
                     if ($temp.Username -eq $usernameItem) {
@@ -203,8 +203,8 @@ ForEach ($computer in $computername) {
                 if ($disconnectAllUser -eq "Y") {
                     Foreach ($discItem in $temp.Username) {
                         Write-host "LOGOFF All users" -ForegroundColor Green
-                         $sessionId = $temp.Id
-                         $logoff = Start-Process -FilePath C:\windows\system32\cmd.exe -ArgumentList "/c logoff $sessionId /server:$computer" -WindowStyle hidden -passthru
+                        $sessionId = $temp.Id
+                        $logoff = Start-Process -FilePath C:\windows\system32\cmd.exe -ArgumentList "/c logoff $sessionId /server:$computer" -WindowStyle hidden -passthru
                     }
                 }
                                         
