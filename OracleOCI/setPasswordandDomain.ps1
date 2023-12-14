@@ -3,7 +3,7 @@
 # Variables for this script
 # $DnsServer - this is the private IP address of the Primary Domain Controller
 # $DnsServer2 - this is the private IP address of the Secondary Domain Controller
-# $DomaintoJoin - this is the full name of the domain you want to join.
+# $Domain - this is the full name of the domain you want to join.
 
 Set-LocalUser -Name "opc" -PasswordNeverExpires 1 -Password (ConvertTo-SecureString -AsPlainText "MyPassword" -Force)
 
