@@ -1,0 +1,49 @@
+#if ($($env:computerName) -eq "Client") {"Runbook running on Azure Client sandbox"} else {"Runbook running on " + $env:computerName}
+Disable-AzContextAutosave -Scope Process
+# You can use 
+Connect-AzAccount -tenant "MytenatID"
+$Token = (Get-AZAccessToken -ResourceUrl https://database.windows.net).Token
+
+$uri = "http://ipinfo.io/ip"
+$publicIP = Invoke-RestMethod -Uri $uri
+$publicIP
+
+$ip_name = "automationaccount" + $publicIP
+
+				$template_txt = "{
+						""`$schema"": ""https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#"",
+						""contentVersion"": ""1.0.0.0"",
+						""parameters"": {
+							""sqlserver"": {
+								""defaultValue"": """",
+								""type"": ""String""
+							},
+
+						},
+						""variables"": {},
+						""resources"": [
+						{
+						  ""name"": ""[concat(parameters('sqlserver'),'/$ip_name')]"",
+						  ""type"": ""Microsoft.Sql/servers/firewallRules"",
+						  ""location"": ""[resourceGroup().location]"",
+						  ""apiVersion"": ""2014-04-01-preview"",
+						  ""properties"": {
+							""startIpAddress"": ""$publicIP"",
+							""endIpAddress"": ""$publicIP""
+						  }
+						}
+					   ]
+					}
+					"
+					
+$template_file = $env:TEMP + "\temptemplate.txt"
+$template_txt | set-content $template_file -force
+
+$deploymentName = "updatefirewallrulefromrunbook"
+$database_sqlserver_rg = "myrg"
+$sqlserver_name = "sqlserver"
+
+$message = "update sql firewall"
+$message	
+
+New-AzResourceGroupDeployment -ResourceGroupName $database_sqlserver_rg -name $deploymentName -TemplateFile $template_file -sqlserver $sqlserver_name
