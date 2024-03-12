@@ -1,0 +1,19 @@
+# Specify username and password
+$Username = "Admin@contoso.com"
+# $passdomain is a variable in Azure DevOps
+$Password = ConvertTo-SecureString "$(passdomain)" -AsPlainText -Force
+$Credential = New-Object System.Management.Automation.PSCredential($Username, $Password)
+
+# Specify computer name
+$ComputerName = "computername"
+
+# Remove computer from Active Directory
+$ADComputer = Get-ADComputer -Filter { Name -eq $ComputerName } -Credential $Credential
+
+if ($ADComputer) {
+    #Remove-ADComputer -Identity $ADComputer -Credential $Credential -Confirm:$false
+$ADComputer | Remove-ADObject -Confirm:$False -recursive
+    Write-Output "Computer $ComputerName has been removed from Active Directory."
+} else {
+    Write-Output "Computer $ComputerName was not found in Active Directory."
+}
